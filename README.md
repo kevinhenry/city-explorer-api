@@ -21,7 +21,7 @@
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 Michael Hendricks
 
-![How this works](https://github.com/kevinhenry/city-explorer-api/blob/main/src/assets/img/The Web Req Response Cycle - MH and KH.jpg)
+![How this works](https://github.com/kevinhenry/city-explorer-api/blob/main/Assets/img/The%20Web%20Req%20Response%20Cycle%20-%20MH%20and%20KH.jpg)
 
 Name of feature: __Set up server repository______________________________
 
