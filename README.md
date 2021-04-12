@@ -19,35 +19,38 @@
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+Michael Hendricks
 
-Name of feature: ________________________________
+![How this works](https://github.com/kevinhenry/city-explorer-api/blob/main/src/assets/img/The Web Req Response Cycle - MH and KH.jpg)
 
-Estimate of time needed to complete: _____
+Name of feature: __Set up server repository______________________________
 
-Start time: _____
-
-Finish time: _____
-
-Actual time needed to complete: _____
-
-
-Name of feature: ________________________________
-
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: __2___
 
 Start time: _____
 
 Finish time: _____
 
-Actual time needed to complete: _____
+Actual time needed to complete: __2.5___
 
 
-Name of feature: ________________________________
+Name of feature: __Weather placeholder______________________________
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: __2___
 
 Start time: _____
 
 Finish time: _____
 
-Actual time needed to complete: _____
+Actual time needed to complete: __3___
+
+
+Name of feature: __Errors revisited______________________________
+
+Estimate of time needed to complete: __2___
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: __2___
