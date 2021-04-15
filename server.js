@@ -13,6 +13,11 @@ require('dotenv').config();
  
 const app = express();
 
+const superagent = require('superagent');
+
+// needed for all servers as a default port
+const PORT = process.env.PORT || 3001;
+
 // makes sure our data is accessible from the React frontend
 app.use(cors());
 app.use((error, request, response, next) => {
@@ -20,8 +25,6 @@ app.use((error, request, response, next) => {
   response.status(500).send('Server Error!')
 });
 
-// needed for all servers as a default port
-const PORT = process.env.PORT || 3001;
 
 // most of your actual server definition goes here
 // a server's job is to listen at some path for a particular method
