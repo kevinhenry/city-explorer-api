@@ -1,8 +1,11 @@
 const express = require('express');
 const cors = require('cors');
+const superagent = require('superagent');
 // import the json file
-// const {response} = require('express');
 const weatherData = require('./data/weather.json');
+
+// const {response} = require('express');
+
 // actually use the .env file I created - where I hide api keys and etc... 
 require('dotenv').config();
 // 
@@ -30,21 +33,17 @@ app.get('/weather', (request, response) => {
   // when we get that request, send a response that says 'hello!'
   // response has some methods that are very helpful, such as a send method
   // response.json(weatherData);
-  const data = weatherData.data.map(eachDay => new Forecast(eachDay.datetime, eachDay.weather.description));
-  response.send(data);
-});
+    const data = weatherData.data.map(eachDay => new Forecast(eachDay.datetime, eachDay.weather.description));
+    response.send(data);
+  });
 
-app.get('/', (request, response) => {
-  response.send('Check Weather!');
-});
+  app.get('/', (request, response) => {
+    response.send('Check Weather!');
+  });
 
-app.get('*', (request, response) => {
-  response.status(500).send('Interal Server Error');
-});
+  app.get('*', (request, response) => {
+    response.status(500).send('Interal Server Error');
+  });
 
 // server is on and listening
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
-
-// What's going on?""
-
-// console.log('hello!');
