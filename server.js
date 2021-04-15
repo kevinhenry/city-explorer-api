@@ -14,16 +14,16 @@ const app = express();
 // needed for all servers as a default port
 const PORT = process.env.PORT || 3001;
 
-function Forecast(day){
+function Forecast(day) {
   this.date = day.datetime;
   this.description = `Low temp of ${day.low_temp}, high temp of ${day.high_temp} with ${day.weather.description}`;
 }
 
-function Movie(movie){
+function Movie(movie) {
   this.title = movie.title;
   this.overview = movie.overview;
   this.average_votes = movie.vote_average;
-  this.total_votes = movie.vote_tot;
+  this.total_votes = movie.vote_count;
   this.image_url = `${process.env.MOVIE_IMG_PREFIX_URI}${movie.poster_path}`;
   this.popularity = movie.popularity;
   this.released_on = movie.release_date;
@@ -43,7 +43,16 @@ app.get('/weather', (request, response) => {
   // when we get that request, send a response that says 'hello!'
   // response has some methods that are very helpful, such as a send method
   // USE superagent to make the api call. the DATA we care most about lives at results.body
-  superagent.get(`${process.env.WEATHERBIT_FORECAST_URL}/daily?lat=${request.query.lat}&lon=${request.query.lon}&key=${process.env.WEATHERBIT_API_KEY}`)
+  // superagent.get(`${process.env.WEATHERBIT_FORECAST_URI}/daily?lat=${request.query.lat}&lon=${request.query.lon}&key=${process.env.WEATHERBIT_API_KEY}`)
+
+  superagent.get('https://api.weatherbit.io/v2.0/forecast/daily')
+    // .query lets us break up the query parameters using an object instead of a string
+    .query({
+      key: process.env.WEATHERBIT_API_KEY,
+      units: 'I',
+      lat: request.query.lat,
+      lon: request.query.long
+    })
   // query lets us break up the query parameters using an object instead of a string
     .then(response => response.body.data)
     .then(data => data.map(dailyWeather => new Forecast(dailyWeather)))
@@ -51,7 +60,14 @@ app.get('/weather', (request, response) => {
 });
 
 app.get('/movies', (request, response) => {
-  superagent.get(`${process.env.MOVIE_IMG_PREFIX_URI}/movie?api_key=${process.env.MOVIE_API_KEY}&query=${req.query.location}`)
+  // superagent.get(`${process.env.MOVIE_URI}/movie?api_key=${process.env.MOVIE_API_KEY}&query=${req.query.location}`)
+
+  superagent.get('https://api.themoviedb.org/3/movie/550')
+    // .query lets us break up the query parameters using an object instead of a string
+    .query({
+      key: process.env.MOVIE_API_KEY,
+      location: request.query.location
+    })
     .then(response => response.body.results)
     .then(movies => movies.map(movie => new Movie(movie)))
     .then(result => response.send(result));
