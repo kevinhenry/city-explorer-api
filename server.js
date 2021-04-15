@@ -1,3 +1,4 @@
+'use strict'
 const express = require('express');
 const cors = require('cors');
 const superagent = require('superagent');
@@ -51,8 +52,13 @@ app.get('/weather', (request, response) => {
       key: process.env.WEATHERBIT_API_KEY,
       units: 'I',
       lat: request.query.lat,
-      lon: request.query.long
+      lon: request.query.lon
     })
+    // .then(weatherData => {
+    //   response.json(weatherData.body.data.map(x => (
+    //     {date: x.valid_date,
+    //       description: x.weather.description})));
+    // });
   // query lets us break up the query parameters using an object instead of a string
     .then(response => response.body.data)
     .then(data => data.map(dailyWeather => new Forecast(dailyWeather)))
@@ -63,6 +69,7 @@ app.get('/movies', (request, response) => {
   // superagent.get(`${process.env.MOVIE_URI}/movie?api_key=${process.env.MOVIE_API_KEY}&query=${req.query.location}`)
 
   superagent.get('https://api.themoviedb.org/3/movie/550')
+  // superagent.get('https://api.themoviedb.org/3/search/movie')
     // .query lets us break up the query parameters using an object instead of a string
     .query({
       key: process.env.MOVIE_API_KEY,
