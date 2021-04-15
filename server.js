@@ -19,6 +19,16 @@ function Forecast(day){
   this.description = `Low temp of ${day.low_temp}, high temp of ${day.high_temp} with ${day.weather.description}`;
 }
 
+function Movie(movie){
+  this.title = movie.title;
+  this.overview = movie.overview;
+  this.average_votes = movie.vote_average;
+  this.total_votes = movie.vote_tot;
+  this.image_url = `${process.env.MOVIE_IMG_PREFIX_URI}${movie.poster_path}`;
+  this.popularity = movie.popularity;
+  this.released_on = movie.release_date;
+}
+
 // makes sure our data is accessible from the React frontend
 app.use(cors());
 app.use((error, request, response, next) => {
@@ -36,16 +46,24 @@ app.get('/weather', (request, response) => {
   superagent.get(`${process.env.WEATHERBIT_FORECAST_URL}/daily?lat=${request.query.lat}&lon=${request.query.lon}&key=${process.env.WEATHERBIT_API_KEY}`)
   // query lets us break up the query parameters using an object instead of a string
     .then(response => response.body.data)
-    .then(data => data.map(dailyWeather => new Forecast(dailyWeather)));
+    .then(data => data.map(dailyWeather => new Forecast(dailyWeather)))
+    .then(result => result.send(result));
+});
+
+app.get('/movies', (request, response) => {
+  superagent.get(`${process.env.MOVIE_IMG_PREFIX_URI}/movie?api_key=${process.env.MOVIE_API_KEY}&query=${req.query.location}`)
+    .then(response => response.body.results)
+    .then(movies => movies.map(movie => new Movie(movie)))
+    .then(result => response.send(result));
 });
 
 app.get('/', (request, response) => {
   response.send('Check Weather!');
-  });
+});
 
 app.get('*', (request, response) => {
   response.status(500).send('Interal Server Error');
-  });
+});
 
 // server is on and listening
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
