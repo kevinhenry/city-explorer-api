@@ -7,9 +7,11 @@ const express = require('express');
 
 const app = express();
 // allow others to hit our server
-// const cors = require('cors');
+const cors = require('cors');
 
-// app.use(cors());
+app.use(cors());
+
+const superagent = require('superagent');
 
 // validate that env is working with or
 const PORT = process.env.PORT || 3001;
