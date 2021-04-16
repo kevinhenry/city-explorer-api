@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3001;
 
 function Forecast(day) {
   this.date = day.datetime;
-  this.description = `Low of ${day.low_temp}, high of ${day.high_temp} with ${day.weather.description}`;
+  this.description = ` | Low of ${day.low_temp} %, High of ${day.high_temp} % with ${day.weather.description}`;
 }
 
 function Movie(movie) {
@@ -25,9 +25,11 @@ function Movie(movie) {
   this.overview = movie.overview;
   this.average_votes = movie.vote_average;
   this.total_votes = movie.vote_count;
-  this.image_url = `${process.env.MOVIE_IMG_PREFIX_URL}${movie.poster_path}`;
+  // this.image_url = `${process.env.MOVIE_IMG_PREFIX_URL}${movie.poster_path}`;
+  this.image_url = movie.poster_path;
   this.popularity = movie.popularity;
   this.released_on = movie.release_date;
+  this.description = ` | Overview ${movie.overview} | Average Votes ${movie.votes_average} | Total Votes ${movie.vote_count} | Poster ${movie.poster_path} | Popularity ${movie.popularity} | Released On ${movie.release_date}`;
 }
 
 // makes sure our data is accessible from the React frontend
