@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3001;
 
 function Forecast(day) {
   this.date = day.datetime;
-  this.description = `Low temp of ${day.low_temp}, high temp of ${day.high_temp} with ${day.weather.description}`;
+  this.description = `Low of ${day.low_temp}, high of ${day.high_temp} with ${day.weather.description}`;
 }
 
 function Movie(movie) {
@@ -25,7 +25,7 @@ function Movie(movie) {
   this.overview = movie.overview;
   this.average_votes = movie.vote_average;
   this.total_votes = movie.vote_count;
-  this.image_url = `${process.env.MOVIE_IMG_PREFIX_URI}${movie.poster_path}`;
+  this.image_url = `${process.env.MOVIE_IMG_PREFIX_URL}${movie.poster_path}`;
   this.popularity = movie.popularity;
   this.released_on = movie.release_date;
 }
@@ -49,7 +49,7 @@ app.get('/weather', (request, response) => {
   superagent.get('https://api.weatherbit.io/v2.0/forecast/daily')
     // .query lets us break up the query parameters using an object instead of a string
     .query({
-      key: process.env.WEATHERBIT_API_KEY,
+      key: process.env.WEATHER_API_KEY,
       units: 'I',
       lat: request.query.lat,
       lon: request.query.lon
