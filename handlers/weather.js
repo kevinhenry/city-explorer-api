@@ -3,7 +3,7 @@ const superagent = require('superagent');
 
 function Forecast(day) {
   this.date = day.datetime;
-  this.description = ` | Low of ${day.low_temp} %, High of ${day.high_temp} % with ${day.weather.description}`;
+  this.description = ` Low of ${day.low_temp} %, High of ${day.high_temp} % with ${day.weather.description}.`;
 }
 
 const forecast = (request, response) => {

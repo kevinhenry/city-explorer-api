@@ -10,7 +10,7 @@ function Movie(movie) {
   this.image_url = `https://image.tmdb.org/t/p/w300/${movie.poster_path}`;
   this.popularity = movie.popularity;
   this.released_on = movie.release_date;
-  this.description = ` | Overview ${movie.overview} | Average Votes ${movie.votes_average} | Total Votes ${movie.vote_count} | Poster ${movie.poster_path} | Popularity ${movie.popularity} | Released On ${movie.release_date}`;
+  this.description = ` Overview ${movie.overview} | Average Votes = ${movie.votes_average} | Total Votes = ${movie.vote_count} | Poster ${movie.poster_path} | Popularity of ${movie.popularity} | Released on ${movie.release_date}.`;
 }
 
   const movies = (request, response) => {
